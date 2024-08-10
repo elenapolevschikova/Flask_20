@@ -1,7 +1,8 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy as sl
 from datetime import datetime
+
 
 
 app = Flask(__name__)  # мы созд. объект на основе класса Flask
@@ -37,9 +38,23 @@ def about():  # выводим функцию
     return render_template("about.html")  # возврат
 
 
-@app.route("/create_article")  #
-def create_article():  # выводим функцию
-    return render_template("create_article.html")  # возврат
+@app.route("/create_article", methods=["POST", "GET"])  # добавляем метод приёма запросов
+def create_article():              # выводим функцию
+    if request.method == 'POST':   # проверяется форма приёма и доб.в БД
+        title = request.form['title']
+        intro = request.form['intro']
+        text = request.form['text']
+
+        article = Article(title=title, intro=intro, text=text)  # создали объект для передачи в БД
+
+        try:
+            db.session.add(article)   # add - добавляем объект
+            db.session.commit()       # commit - сохраняем объект
+            return redirect('/')
+        except:
+            return "При добавлении статьи произошла ошибка"
+    else:
+        return render_template("create_article.html")  # возврат
 
 
 # @app.route("/user/<string:name>/<int:id>")  # если надо получить некий параметр из url адр.(/user,/name имя,/id инд)
