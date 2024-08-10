@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Страница про нас
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Бесплатно</font></font></h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$0 </font></font><small class="text-body-secondary fw-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">/мес.</font></font></small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включено 10 пользователей</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 ГБ памяти</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поддержка по электронной почте</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Доступ к справочному центру</font></font></li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Зарегистрируйтесь бесплатно</font></font></button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Профи</font></font></h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">15 долл . США </font></font><small class="text-body-secondary fw-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">/мес.</font></font></small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включено 20 пользователей</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10 ГБ памяти</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Приоритетная поддержка по электронной почте</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Доступ к справочному центру</font></font></li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Начать</font></font></button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-bg-primary border-primary">
+            <h4 class="my-0 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предприятие</font></font></h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$29 </font></font><small class="text-body-secondary fw-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">/мес.</font></font></small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Включено 30 пользователей</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">15 ГБ памяти</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поддержка по телефону и электронной почте</font></font></li>
+              <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Доступ к справочному центру</font></font></li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Связаться с нами</font></font></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="display-6 text-center mb-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сравнить планы</font></font></h2>
+
+    <div class="table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th style="width: 34%;"></th>
+            <th style="width: 22%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Бесплатно</font></font></th>
+            <th style="width: 22%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Профи</font></font></th>
+            <th style="width: 22%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предприятие</font></font></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="text-start"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Публичный</font></font></th>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Частный</font></font></th>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="row" class="text-start"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Разрешения</font></font></th>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Поделиться</font></font></th>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Неограниченное количество участников</font></font></th>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дополнительная безопасность</font></font></th>
+            <td></td>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+    </div>
+<h1>Основная страница сайта</h1>
+{% endblock %}
