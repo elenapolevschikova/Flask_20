@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy as sl
 from datetime import datetime
@@ -17,7 +17,7 @@ class Article(db.Model):  # создаём класс для хранения з
     intro = sl.Column(sl.String(300), nullable=False)
     # intro - вступление, String(300) - текст, длинна, nullable=False - не вступать без вступления
     text = sl.Column(sl.Text, nullable=False)   # text - для установки полного текста
-    date = sl.Column(sl.DateTime, default=datetime.utcnow)  # date - дата публикаций, utcnow - время публикации
+    date = sl.Column(sl.DateTime, default=datetime.timestamp)  # date - дата публикаций, utcnow - время публикации
     with app.app_context():
         db.create_all()
 
@@ -36,6 +36,14 @@ def index():  # выводим функцию
 @app.route("/about")  #
 def about():  # выводим функцию
     return render_template("about.html")  # возврат
+
+
+@app.route("/posts")  # добавляем метод вывода информации из стороннего сайта
+def posts():  # выводим функцию
+    # Article.query.outerjoin(Comment).group_by(Article.id).order_by(func.count(Comment.id).asc()).all()
+    articles = Article.query.order_by(Article.date).all()
+    # first()выводит первую запись взятую из БД, order_by(Article.date).all() - сортирует всё по полю date
+    return render_template("posts.html", articles=articles)  # возв.шаблон в нём мы можем раб.с article
 
 
 @app.route("/create_article", methods=["POST", "GET"])  # добавляем метод приёма запросов
