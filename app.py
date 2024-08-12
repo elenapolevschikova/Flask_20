@@ -18,8 +18,6 @@ class Article(db.Model):  # создаём класс для хранения з
     # intro - вступление, String(300) - текст, длинна, nullable=False - не вступать без вступления
     text = sl.Column(sl.Text, nullable=False)   # text - для установки полного текста
     date = sl.Column(sl.DateTime, default=datetime.timestamp)  # date - дата публикаций, utcnow - время публикации
-    with app.app_context():
-        db.create_all()
 
 
     def __repr__(self):  # при поиске инфо, метод выдачи объекта с id
@@ -40,25 +38,70 @@ def about():  # выводим функцию
 
 @app.route("/posts")  # добавляем метод вывода информации из стороннего сайта
 def posts():  # выводим функцию
-    # Article.query.outerjoin(Comment).group_by(Article.id).order_by(func.count(Comment.id).asc()).all()
-    articles = Article.query.order_by(Article.date).all()
+    articles = Article.query.order_by(Article.date.desc()).all()
     # first()выводит первую запись взятую из БД, order_by(Article.date).all() - сортирует всё по полю date
     return render_template("posts.html", articles=articles)  # возв.шаблон в нём мы можем раб.с article
 
 
+@app.route("/posts/<int:id>")  # добавляем метод вывода информации из стороннего сайта
+def post_detail(id):  # выводим функцию
+    article = Article.query.get(id)
+    # first()выводит первую запись взятую из БД, order_by(Article.date).all() - сортирует всё по полю date
+    return render_template("post_detail.html", article=article)  # возв.шаблон в нём мы можем раб.с article
+
+
+# В функции принимаем ID определенной записи
+@app.route('/posts/<int:id>/delete')
+def post_delete(id):
+    article = Article.query.get_or_404(id)
+    try:
+        db.session.delete(article)  # delete - удаляем объект
+        db.session.commit()         # commit - сохраняем объект
+        return redirect('/posts')
+    except:
+        return "При удалении статьи произошла ошибка"
+
+
+@app.route('/posts/<int:id>/update', methods=['POST', 'GET'])
+def post_update(id):
+    article = Article.query.get(id)
+    if request.method == "POST":
+        # article.title = request.form['title']
+        # id =request.form['id']
+        # type = request.form['type']
+        article.title = request.form['title']
+        article.intro = request.form['intro']
+        article.text = request.form['text']
+        # date = request.form['date']
+
+        try:
+            db.session.commit()    # commit - сохраняем объект
+            return redirect('/posts')
+        except:
+            return "При редактировании статьи произошла ошибка"
+        else:
+            article = Article.query.get(id)
+            return render_template("post_update.html", article=article)
+
+
 @app.route("/create_article", methods=["POST", "GET"])  # добавляем метод приёма запросов
 def create_article():              # выводим функцию
+    # article = Article.query.get(id)
     if request.method == 'POST':   # проверяется форма приёма и доб.в БД
+        # article.title = request.form['title']
+        # id =request.form['id']
+        # type = request.form['type']
         title = request.form['title']
         intro = request.form['intro']
         text = request.form['text']
+        # date = request.form['date']
 
-        article = Article(title=title, intro=intro, text=text)  # создали объект для передачи в БД
+        article = Article(title=title, intro=intro, text=text)  # созд.объ.д/передачи в БД
 
         try:
             db.session.add(article)   # add - добавляем объект
             db.session.commit()       # commit - сохраняем объект
-            return redirect('/')
+            return redirect('/posts')
         except:
             return "При добавлении статьи произошла ошибка"
     else:
@@ -70,6 +113,8 @@ def create_article():              # выводим функцию
 #     return "User page:" + name + " - " + str(id)     # возврат
 
 
-if __name__ == "__main__":   # если мы будем выводить в этом файле main
-    app.run(debug=True)   # обращ. к объекту app далее к команде run(запуск этого проекта)
+if __name__ == "__main__":  # если мы будем выводить в этом файле main
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)     # обращ. к объекту app далее к команде run(запуск этого проекта)
 
